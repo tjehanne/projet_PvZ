@@ -4,6 +4,7 @@ import com.oxyl.coursepfback.infrastructure.entities.MapEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.lang.NonNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +59,7 @@ public class MapDAO implements MapDAOInterface {
 
     private static class MapRowMapper implements RowMapper<MapEntity> {
         @Override
-        public MapEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public MapEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
             MapEntity m = new MapEntity();
             m.setId_map(rs.getInt("id_map"));
             m.setLigne(rs.getInt("ligne"));

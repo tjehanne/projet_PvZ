@@ -5,7 +5,6 @@ import com.oxyl.coursepfback.core.model.ZombieModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ZombieDtoMapper {
@@ -45,6 +44,6 @@ public class ZombieDtoMapper {
     public List<ZombieDto> mapListModelToDto(List<ZombieModel> models) {
         return models.stream()
                 .map(this::mapModelToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

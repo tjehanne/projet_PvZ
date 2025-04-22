@@ -4,6 +4,7 @@ import com.oxyl.coursepfback.infrastructure.entities.PlanteEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.lang.NonNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,7 +67,7 @@ public class PlanteDAO implements PlanteDAOInterface {
 
     private static class PlanteRowMapper implements RowMapper<PlanteEntity> {
         @Override
-        public PlanteEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public PlanteEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
             PlanteEntity p = new PlanteEntity();
             p.setId_plante(rs.getInt("id_plante"));
             p.setNom(rs.getString("nom"));

@@ -2,7 +2,6 @@ package com.oxyl.coursepfback.infrastructure.repository;
 
 import com.oxyl.coursepfback.core.model.MapModel;
 import com.oxyl.coursepfback.infrastructure.dao.MapDAO;
-import com.oxyl.coursepfback.infrastructure.entities.MapEntity;
 import com.oxyl.coursepfback.infrastructure.mapper.MapEntityMapper;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,6 @@ package com.oxyl.coursepfback.infrastructure.repository;
 
 import com.oxyl.coursepfback.core.model.ZombieModel;
 import com.oxyl.coursepfback.infrastructure.dao.ZombieDAO;
-import com.oxyl.coursepfback.infrastructure.entities.ZombieEntity;
 import com.oxyl.coursepfback.infrastructure.mapper.ZombieEntityMapper;
 import org.springframework.stereotype.Repository;
 

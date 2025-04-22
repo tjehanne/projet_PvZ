@@ -4,6 +4,7 @@ import com.oxyl.coursepfback.infrastructure.entities.ZombieEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.lang.NonNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,17 +74,17 @@ public class ZombieDAO implements ZombieDAOInterface {
 
     private static class ZombieRowMapper implements RowMapper<ZombieEntity> {
         @Override
-        public ZombieEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-            ZombieEntity z = new ZombieEntity();
-            z.setId_zombie(rs.getInt("id_zombie"));
-            z.setNom(rs.getString("nom"));
-            z.setPoint_de_vie(rs.getInt("point_de_vie"));
-            z.setAttaque_par_seconde(rs.getDouble("attaque_par_seconde"));
-            z.setDegat_attaque(rs.getInt("degat_attaque"));
-            z.setVitesse_de_deplacement(rs.getDouble("vitesse_de_deplacement"));
-            z.setChemin_image(rs.getString("chemin_image"));
-            z.setId_map(rs.getObject("id_map") != null ? rs.getInt("id_map") : null);
-            return z;
+        public ZombieEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+            ZombieEntity zombie = new ZombieEntity();
+            zombie.setId_zombie(rs.getInt("id_zombie"));
+            zombie.setNom(rs.getString("nom"));
+            zombie.setPoint_de_vie(rs.getInt("point_de_vie"));
+            zombie.setAttaque_par_seconde(rs.getDouble("attaque_par_seconde"));
+            zombie.setDegat_attaque(rs.getInt("degat_attaque"));
+            zombie.setVitesse_de_deplacement(rs.getDouble("vitesse_de_deplacement"));
+            zombie.setChemin_image(rs.getString("chemin_image"));
+            zombie.setId_map(rs.getInt("id_map"));
+            return zombie;
         }
     }
 }

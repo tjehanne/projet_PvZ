@@ -3,6 +3,7 @@ package com.epf;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import com.oxyl.coursepfback.config.DatabaseConfig;
 import com.oxyl.coursepfback.config.WebConfig;
+import org.springframework.lang.NonNull;
 
 public class Main extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,6 +18,7 @@ public class Main extends AbstractAnnotationConfigDispatcherServletInitializer {
     }
 
     @Override
+    @NonNull
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }

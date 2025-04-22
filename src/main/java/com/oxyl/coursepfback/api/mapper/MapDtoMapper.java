@@ -17,7 +17,11 @@ public class MapDtoMapper {
         dto.setId_map(model.getId_map());
         dto.setLigne(model.getLigne());
         dto.setColonne(model.getColonne());
-        dto.setChemin_image(model.getChemin_image());
+        String imagePath = model.getChemin_image();
+        if (imagePath != null && !imagePath.startsWith("/")) {
+            imagePath = "/CoursEpfBack/" + imagePath;
+        }
+        dto.setChemin_image(imagePath);
 
         return dto;
     }
@@ -29,7 +33,11 @@ public class MapDtoMapper {
         model.setId_map(dto.getId_map());
         model.setLigne(dto.getLigne());
         model.setColonne(dto.getColonne());
-        model.setChemin_image(dto.getChemin_image());
+        String imagePath = dto.getChemin_image();
+        if (imagePath != null && imagePath.startsWith("/CoursEpfBack/")) {
+            imagePath = imagePath.substring("/CoursEpfBack/".length());
+        }
+        model.setChemin_image(imagePath);
 
         return model;
     }

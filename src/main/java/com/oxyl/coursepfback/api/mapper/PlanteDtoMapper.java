@@ -5,7 +5,6 @@ import com.oxyl.coursepfback.core.model.PlanteModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class PlanteDtoMapper {
@@ -29,6 +28,9 @@ public class PlanteDtoMapper {
     }
 
     public PlanteModel mapDtoToModel(PlanteDto planteDto) {
+        if (planteDto == null) {
+            return null;
+        }
         PlanteModel planteModel = new PlanteModel();
         planteModel.setId_plante(planteDto.getId_plante());
         planteModel.setNom(planteDto.getNom());
@@ -45,6 +47,6 @@ public class PlanteDtoMapper {
     public List<PlanteDto> mapListModelToDto(List<PlanteModel> plantes) {
         return plantes.stream()
                 .map(this::mapModelToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

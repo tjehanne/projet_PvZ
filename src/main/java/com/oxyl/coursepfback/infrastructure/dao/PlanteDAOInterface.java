@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface PlanteDAOInterface {
-    public PlanteEntity findById(Integer id);
-    public List<PlanteEntity> findAll();
+    PlanteEntity findById(Integer id);
+    List<PlanteEntity> findAll();
 }
