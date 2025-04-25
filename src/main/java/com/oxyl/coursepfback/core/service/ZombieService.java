@@ -12,7 +12,7 @@ import java.util.List;
 public class ZombieService {
 
     private final ZombieRepository zombieRepository;
-    private static final String DEFAULT_ZOMBIE_IMAGE = "images/zombie/default.png";
+    protected static final String DEFAULT_ZOMBIE_IMAGE = "images/zombie/default.png";
 
     @Autowired
     public ZombieService(ZombieRepository zombieRepository) {
@@ -31,18 +31,22 @@ public class ZombieService {
         return zombieRepository.findByMapId(mapId);
     }
 
-    private String validateAndGetImagePath(String imagePath) {
+    protected boolean isValidImagePath(String imagePath) {
         if (imagePath == null || imagePath.isEmpty()) {
-            return DEFAULT_ZOMBIE_IMAGE;
+            return false;
         }
 
         try {
             ClassPathResource resource = new ClassPathResource("webapp/" + imagePath);
             resource.getInputStream(); 
-            return imagePath;
+            return true;
         } catch (Exception e) {
-            return DEFAULT_ZOMBIE_IMAGE;
+            return false;
         }
+    }
+
+    private String validateAndGetImagePath(String imagePath) {
+        return isValidImagePath(imagePath) ? imagePath : DEFAULT_ZOMBIE_IMAGE;
     }
 
     public void create(ZombieModel model) {
