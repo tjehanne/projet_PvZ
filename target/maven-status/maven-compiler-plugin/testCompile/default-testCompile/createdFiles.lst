@@ -20,6 +20,7 @@ com\oxyl\coursepfback\infrastructure\entities\ZombieEntityTest.class
 com\oxyl\coursepfback\infrastructure\dao\MapDAOTest.class
 com\oxyl\coursepfback\infrastructure\dao\PlanteDAOTest.class
 com\oxyl\coursepfback\core\model\ZombieModelTest.class
+com\oxyl\coursepfback\infrastructure\dao\ZombieDAOTest.class
 com\oxyl\coursepfback\infrastructure\entities\PlanteEntityTest.class
 com\oxyl\coursepfback\api\mapper\MapDtoMapperTest.class
 com\oxyl\coursepfback\core\model\MapModelTest.class

@@ -6,9 +6,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Mapper pour la conversion entre les entités Zombie et les modèles Zombie.
+ * Cette classe assure la transformation des objets entre la couche infrastructure et la couche métier.
+ */
 @Component
 public class ZombieEntityMapper {
 
+    /**
+     * Convertit une entité Zombie en modèle Zombie
+     * @param entity L'entité à convertir
+     * @return Le modèle Zombie correspondant, null si l'entité est null
+     */
     public ZombieModel mapEntityToModel(ZombieEntity entity) {
         if (entity == null) return null;
 
@@ -25,6 +34,11 @@ public class ZombieEntityMapper {
         return model;
     }
 
+    /**
+     * Convertit un modèle Zombie en entité Zombie
+     * @param model Le modèle à convertir
+     * @return L'entité Zombie correspondante, null si le modèle est null
+     */
     public ZombieEntity mapModelToEntity(ZombieModel model) {
         if (model == null) return null;
 
@@ -41,6 +55,11 @@ public class ZombieEntityMapper {
         return entity;
     }
 
+    /**
+     * Convertit une liste d'entités Zombie en liste de modèles Zombie
+     * @param entities La liste d'entités à convertir
+     * @return La liste des modèles Zombie correspondants
+     */
     public List<ZombieModel> mapListEntityToModel(List<ZombieEntity> entities) {
         return entities.stream().map(this::mapEntityToModel).toList();
     }

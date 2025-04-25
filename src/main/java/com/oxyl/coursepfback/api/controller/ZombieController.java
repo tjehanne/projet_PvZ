@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Contrôleur REST gérant les endpoints relatifs aux zombies.
+ * Permet de créer, lire, mettre à jour et supprimer des zombies.
+ */
 @RestController
 @RequestMapping("/zombies")
 public class ZombieController {
@@ -17,27 +21,46 @@ public class ZombieController {
     private final ZombieService zombieService;
     private final ZombieDtoMapper zombieDtoMapper;
 
+    /**
+     * Constructeur avec injection des dépendances
+     * @param zombieService Service gérant la logique métier des zombies
+     * @param zombieDtoMapper Mapper pour la conversion entre DTO et modèle
+     */
     @Autowired
     public ZombieController(ZombieService zombieService, ZombieDtoMapper zombieDtoMapper) {
         this.zombieService = zombieService;
         this.zombieDtoMapper = zombieDtoMapper;
     }
 
+    /**
+     * Récupère tous les zombies
+     * @return Liste de tous les zombies
+     */
     @GetMapping
     public List<ZombieDto> findAllZombies() {
         List<ZombieModel> zombies = zombieService.findAllZombies();
         return zombieDtoMapper.mapListModelToDto(zombies);
     }
 
+    /**
+     * Récupère un zombie par son identifiant
+     * @param id Identifiant du zombie
+     * @return Le zombie si trouvé, sinon retourne une erreur 404
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<ZombieDto> getZombieById(@PathVariable("id") Integer id){
+    public ResponseEntity<ZombieDto> getZombieById(@PathVariable("id") Integer id) {
         ZombieModel zombie = zombieService.findZombieById(id);
-        if (zombie == null){
+        if (zombie == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(zombieDtoMapper.mapModelToDto(zombie), HttpStatus.OK);
     }
 
+    /**
+     * Crée un nouveau zombie
+     * @param zombieDto DTO contenant les informations du zombie à créer
+     * @return Code 201 si la création est réussie
+     */
     @PostMapping
     public ResponseEntity<Void> createZombie(@RequestBody ZombieDto zombieDto) {
         ZombieModel zombieModel = zombieDtoMapper.mapDtoToModel(zombieDto);

@@ -1,19 +1,46 @@
 package com.oxyl.coursepfback.core.model;
 
+/**
+ * Classe modèle représentant une plante dans le jeu.
+ * Contient toutes les caractéristiques d'une plante comme ses points de vie,
+ * son attaque, son coût en soleil, etc.
+ */
 public class PlanteModel {
+    /** Identifiant unique de la plante */
     private Integer id_plante;
+    /** Nom de la plante */
     private String nom;
+    /** Points de vie de la plante */
     private Integer point_de_vie;
+    /** Fréquence d'attaque en attaques par seconde */
     private Double attaque_par_seconde;
+    /** Dégâts infligés par attaque */
     private Integer degat_attaque;
+    /** Coût en soleil pour planter la plante */
     private Integer cout;
+    /** Production de soleil par seconde */
     private Double soleil_par_seconde;
+    /** Effet spécial de la plante */
     private String effet;
+    /** Chemin vers l'image de la plante */
     private String chemin_image;
 
+    /** Constructeur par défaut */
     public PlanteModel() {
     }
 
+    /**
+     * Constructeur avec tous les paramètres
+     * @param id_plante Identifiant de la plante
+     * @param nom Nom de la plante
+     * @param point_de_vie Points de vie
+     * @param attaque_par_seconde Fréquence d'attaque
+     * @param degat_attaque Dégâts par attaque
+     * @param cout Coût en soleil
+     * @param soleil_par_seconde Production de soleil
+     * @param effet Effet spécial
+     * @param chemin_image Chemin de l'image
+     */
     public PlanteModel(Integer id_plante, String nom, Integer point_de_vie, Double attaque_par_seconde,
                        Integer degat_attaque, Integer cout, Double soleil_par_seconde,
                        String effet, String chemin_image) {

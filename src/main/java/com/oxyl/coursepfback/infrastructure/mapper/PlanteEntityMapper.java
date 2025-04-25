@@ -6,9 +6,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Mapper pour la conversion entre les entités Plante et les modèles Plante.
+ * Cette classe assure la transformation des objets entre la couche infrastructure et la couche métier.
+ */
 @Component
 public class PlanteEntityMapper {
 
+    /**
+     * Convertit une entité Plante en modèle Plante
+     * @param entity L'entité à convertir
+     * @return Le modèle Plante correspondant, null si l'entité est null
+     */
     public PlanteModel mapEntityToModel(PlanteEntity entity) {
         if (entity == null) {
             return null;
@@ -26,6 +35,11 @@ public class PlanteEntityMapper {
         return planteModel;
     }
 
+    /**
+     * Convertit un modèle Plante en entité Plante
+     * @param planteModel Le modèle à convertir
+     * @return L'entité Plante correspondante, null si le modèle est null
+     */
     public PlanteEntity mapModelToEntity(PlanteModel planteModel) {
         if (planteModel == null) {
             return null;
@@ -43,6 +57,11 @@ public class PlanteEntityMapper {
         return planteEntity;
     }
 
+    /**
+     * Convertit une liste d'entités Plante en liste de modèles Plante
+     * @param entities La liste d'entités à convertir
+     * @return La liste des modèles Plante correspondants
+     */
     public List<PlanteModel> mapListEntityToListModel(List<PlanteEntity> entities) {
         return entities.stream()
                 .map(this::mapEntityToModel)

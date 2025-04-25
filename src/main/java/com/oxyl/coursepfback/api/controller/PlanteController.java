@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Contrôleur REST gérant les endpoints relatifs aux plantes.
+ * Permet de créer, lire, mettre à jour et supprimer des plantes.
+ */
 @RestController
 @RequestMapping("/plantes")
 public class PlanteController {
@@ -17,27 +21,46 @@ public class PlanteController {
     private final PlanteService planteService;
     private final PlanteDtoMapper planteDtoMapper;
 
+    /**
+     * Constructeur avec injection des dépendances
+     * @param planteService Service gérant la logique métier des plantes
+     * @param planteDtoMapper Mapper pour la conversion entre DTO et modèle
+     */
     @Autowired
     public PlanteController(PlanteService planteService, PlanteDtoMapper planteDtoMapper) {
         this.planteService = planteService;
         this.planteDtoMapper = planteDtoMapper;
     }
 
+    /**
+     * Récupère toutes les plantes
+     * @return Liste de toutes les plantes
+     */
     @GetMapping
     public List<PlanteDto> findAllPlantes() {
         List<PlanteModel> plantes = planteService.findAllPlantes();
         return planteDtoMapper.mapListModelToDto(plantes);
     }
 
+    /**
+     * Récupère une plante par son identifiant
+     * @param id Identifiant de la plante
+     * @return La plante si trouvée, sinon retourne une erreur 404
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<PlanteDto> getPlanteById(@PathVariable("id") Integer id){
+    public ResponseEntity<PlanteDto> getPlanteById(@PathVariable("id") Integer id) {
         PlanteModel plante = planteService.findPlanteById(id);
-        if (plante == null){
+        if (plante == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(planteDtoMapper.mapModelToDto(plante), HttpStatus.OK);
     }
 
+    /**
+     * Crée une nouvelle plante
+     * @param planteDto DTO contenant les informations de la plante à créer
+     * @return Code 201 si la création est réussie
+     */
     @PostMapping
     public ResponseEntity<Void> createPlante(@RequestBody PlanteDto planteDto) {
         PlanteModel planteModel = planteDtoMapper.mapDtoToModel(planteDto);

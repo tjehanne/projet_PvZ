@@ -1,17 +1,67 @@
 package com.oxyl.coursepfback.infrastructure.entities;
 
+/**
+ * Entité représentant un zombie dans la base de données.
+ * Cette classe est utilisée pour la persistance des données des zombies du jeu.
+ * Elle contient les caractéristiques d'un zombie comme ses points de vie, son attaque, sa vitesse, etc.
+ */
 public class ZombieEntity {
+    /**
+     * Identifiant unique du zombie dans la base de données
+     */
     private Integer id_zombie;
+
+    /**
+     * Nom du zombie
+     */
     private String nom;
+
+    /**
+     * Points de vie du zombie
+     */
     private Integer point_de_vie;
+
+    /**
+     * Nombre d'attaques par seconde
+     */
     private Double attaque_par_seconde;
+
+    /**
+     * Dégâts infligés par attaque
+     */
     private Integer degat_attaque;
+
+    /**
+     * Vitesse de déplacement du zombie
+     */
     private Double vitesse_de_deplacement;
+
+    /**
+     * Chemin d'accès vers l'image du zombie
+     */
     private String chemin_image;
+
+    /**
+     * Identifiant de la map sur laquelle se trouve le zombie
+     */
     private Integer id_map;
 
+    /**
+     * Constructeur par défaut
+     */
     public ZombieEntity() {}
 
+    /**
+     * Constructeur avec tous les paramètres
+     * @param id_zombie Identifiant du zombie
+     * @param nom Nom du zombie
+     * @param point_de_vie Points de vie
+     * @param attaque_par_seconde Fréquence d'attaque
+     * @param degat_attaque Dégâts par attaque
+     * @param vitesse_de_deplacement Vitesse de déplacement
+     * @param chemin_image Chemin de l'image
+     * @param id_map Identifiant de la map
+     */
     public ZombieEntity(Integer id_zombie, String nom, Integer point_de_vie, Double attaque_par_seconde, Integer degat_attaque, Double vitesse_de_deplacement, String chemin_image, Integer id_map) {
         this.id_zombie = id_zombie;
         this.nom = nom;
@@ -23,6 +73,7 @@ public class ZombieEntity {
         this.id_map = id_map;
     }
 
+    // Getters et Setters
     public Integer getId_zombie() { return id_zombie; }
     public void setId_zombie(Integer id_zombie) { this.id_zombie = id_zombie; }
 

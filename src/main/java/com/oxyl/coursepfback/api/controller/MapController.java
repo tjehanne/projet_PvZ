@@ -10,6 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Contrôleur REST gérant les endpoints relatifs aux maps du jeu.
+ * Permet de créer, lire, mettre à jour et supprimer des maps.
+ * Une map représente un niveau de jeu avec ses dimensions et son image.
+ */
 @RestController
 @RequestMapping("/maps")
 public class MapController {
@@ -17,27 +22,46 @@ public class MapController {
     private final MapService mapService;
     private final MapDtoMapper mapDtoMapper;
 
+    /**
+     * Constructeur avec injection des dépendances
+     * @param mapService Service gérant la logique métier des maps
+     * @param mapDtoMapper Mapper pour la conversion entre DTO et modèle
+     */
     @Autowired
     public MapController(MapService mapService, MapDtoMapper mapDtoMapper) {
         this.mapService = mapService;
         this.mapDtoMapper = mapDtoMapper;
     }
 
+    /**
+     * Récupère toutes les maps disponibles
+     * @return Liste de toutes les maps du jeu
+     */
     @GetMapping
     public List<MapDto> findAllMaps() {
         List<MapModel> maps = mapService.findAllMaps();
         return mapDtoMapper.mapListModelToDto(maps);
     }
 
+    /**
+     * Récupère une map par son identifiant
+     * @param id Identifiant de la map
+     * @return La map si trouvée, sinon retourne une erreur 404
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<MapDto> getMapById(@PathVariable("id") Integer id){
+    public ResponseEntity<MapDto> getMapById(@PathVariable("id") Integer id) {
         MapModel map = mapService.findMapById(id);
-        if (map == null){
+        if (map == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(mapDtoMapper.mapModelToDto(map), HttpStatus.OK);
     }
 
+    /**
+     * Crée une nouvelle map
+     * @param mapDto DTO contenant les informations de la map à créer
+     * @return Code 201 si la création est réussie
+     */
     @PostMapping
     public ResponseEntity<Void> createMap(@RequestBody MapDto mapDto) {
         MapModel mapModel = mapDtoMapper.mapDtoToModel(mapDto);

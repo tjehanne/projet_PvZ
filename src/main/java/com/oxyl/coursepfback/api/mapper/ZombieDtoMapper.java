@@ -5,45 +5,79 @@ import com.oxyl.coursepfback.core.model.ZombieModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Classe de mapping pour convertir les objets Zombie entre DTO et Model.
+ * Permet d'assurer la conversion des données entre la couche API et la couche métier.
+ * Gère la transformation des attributs spécifiques aux zombies.
+ */
 @Component
 public class ZombieDtoMapper {
 
-    public ZombieDto mapModelToDto(ZombieModel model) {
-        if (model == null) return null;
+    /**
+     * Convertit un modèle de zombie en DTO
+     * @param zombieModel Le modèle de zombie à convertir
+     * @return Le DTO correspondant, ou null si le modèle est null
+     */
+    public ZombieDto mapModelToDto(ZombieModel zombieModel) {
+        if (zombieModel == null) {
+            return null;
+        }
 
-        ZombieDto dto = new ZombieDto();
-        dto.setId_zombie(model.getId_zombie());
-        dto.setNom(model.getNom());
-        dto.setPoint_de_vie(model.getPoint_de_vie());
-        dto.setAttaque_par_seconde(model.getAttaque_par_seconde());
-        dto.setDegat_attaque(model.getDegat_attaque());
-        dto.setVitesse_de_deplacement(model.getVitesse_de_deplacement());
-        dto.setChemin_image(model.getChemin_image());
-        dto.setId_map(model.getId_map());
-
-        return dto;
+        ZombieDto zombieDto = new ZombieDto();
+        zombieDto.setId_zombie(zombieModel.getId_zombie());
+        zombieDto.setNom(zombieModel.getNom());
+        zombieDto.setPoint_de_vie(zombieModel.getPoint_de_vie());
+        zombieDto.setAttaque_par_seconde(zombieModel.getAttaque_par_seconde());
+        zombieDto.setDegat_attaque(zombieModel.getDegat_attaque());
+        zombieDto.setVitesse_de_deplacement(zombieModel.getVitesse_de_deplacement());
+        zombieDto.setChemin_image(zombieModel.getChemin_image());
+        zombieDto.setId_map(zombieModel.getId_map());
+        return zombieDto;
     }
 
-    public ZombieModel mapDtoToModel(ZombieDto dto) {
-        if (dto == null) return null;
+    /**
+     * Convertit un DTO de zombie en modèle
+     * @param zombieDto Le DTO à convertir
+     * @return Le modèle correspondant, ou null si le DTO est null
+     */
+    public ZombieModel mapDtoToModel(ZombieDto zombieDto) {
+        if (zombieDto == null) {
+            return null;
+        }
 
-        ZombieModel model = new ZombieModel();
-        model.setId_zombie(dto.getId_zombie());
-        model.setNom(dto.getNom());
-        model.setPoint_de_vie(dto.getPoint_de_vie());
-        model.setAttaque_par_seconde(dto.getAttaque_par_seconde());
-        model.setDegat_attaque(dto.getDegat_attaque());
-        model.setVitesse_de_deplacement(dto.getVitesse_de_deplacement());
-        model.setChemin_image(dto.getChemin_image());
-        model.setId_map(dto.getId_map());
-
-        return model;
+        ZombieModel zombieModel = new ZombieModel();
+        zombieModel.setId_zombie(zombieDto.getId_zombie());
+        zombieModel.setNom(zombieDto.getNom());
+        zombieModel.setPoint_de_vie(zombieDto.getPoint_de_vie());
+        zombieModel.setAttaque_par_seconde(zombieDto.getAttaque_par_seconde());
+        zombieModel.setDegat_attaque(zombieDto.getDegat_attaque());
+        zombieModel.setVitesse_de_deplacement(zombieDto.getVitesse_de_deplacement());
+        zombieModel.setChemin_image(zombieDto.getChemin_image());
+        zombieModel.setId_map(zombieDto.getId_map());
+        return zombieModel;
     }
 
-    public List<ZombieDto> mapListModelToDto(List<ZombieModel> models) {
-        return models.stream()
+    /**
+     * Convertit une liste de modèles en liste de DTOs
+     * @param zombieModels La liste de modèles à convertir
+     * @return La liste des DTOs correspondants
+     */
+    public List<ZombieDto> mapListModelToDto(List<ZombieModel> zombieModels) {
+        return zombieModels.stream()
                 .map(this::mapModelToDto)
-                .toList();
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Convertit une liste de DTOs en liste de modèles
+     * @param zombieDtos La liste de DTOs à convertir
+     * @return La liste des modèles correspondants
+     */
+    public List<ZombieModel> mapListDtoToModel(List<ZombieDto> zombieDtos) {
+        return zombieDtos.stream()
+                .map(this::mapDtoToModel)
+                .collect(Collectors.toList());
     }
 }
