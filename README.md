@@ -28,6 +28,10 @@ Le projet suit une architecture en couches :
 - `core/model` : Les modèles métier
 - `core/service` : La logique métier
 - `infrastructure` : La couche d'accès aux données
+  - `dao` : Objets d'accès aux données
+  - `entities` : Entités de la base de données
+  - `repository` : Repositories pour l'accès aux données
+  - `mapper` : Convertisseurs Entity <-> Model
 
 ## Points d'Entrée de l'API
 
@@ -80,13 +84,30 @@ Le projet suit une architecture en couches :
 
 ## Technologies Utilisées
 
+### Core Dependencies
 - Spring MVC 6.2.2
 - Spring JDBC 6.1.13
 - MySQL Connector 8.0.33
-- Jackson 2.18.2
-- Jakarta Servlet 6.1.0
+- Jackson Databind 2.18.2
+- Jakarta Servlet API 6.1.0
 - Logback Classic 1.5.16
 
-## Support
+### Test Dependencies
+- JUnit Jupiter 5.10.2
+- Mockito Core 5.11.0
+- Mockito JUnit Jupiter 5.11.0
+- AssertJ Core 3.25.3
+- Spring Test 6.2.2
 
-Pour toute question ou problème, veuillez créer une issue dans le repository du projet. 
+## Tests
+
+Le projet inclut une suite complète de tests unitaires et d'intégration. Les tests sont organisés selon la même structure que le code source principal :
+- Tests des contrôleurs
+- Tests des services
+- Tests des repositories
+- Tests des mappers
+
+Pour exécuter les tests :
+```bash
+mvn test
+```
